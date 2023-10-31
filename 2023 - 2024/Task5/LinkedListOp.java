@@ -16,7 +16,24 @@ public class LinkedListOp
         return max;
     }
 
-    public static void setMaxAfterNumber (Node<Integer> first) // 1
+    public static int valueCounter(Node<Integer> first, int n)
+    {
+        Node<Integer> curr = first;
+
+        int counter = 0;
+
+        while (curr != null)
+        {
+            if (curr.getValue() == n)
+                counter++;
+
+            curr = curr.getNext();
+        }
+
+        return counter;
+    }
+
+    public static void ex1(Node<Integer> first)
     {
         int max = getMax(first);
 
@@ -31,7 +48,7 @@ public class LinkedListOp
         }
     }
 
-    public static void setListToMax (Node<Integer> first) // 2
+    public static void ex2(Node<Integer> first)
     {
         int max = getMax(first);
 
@@ -44,7 +61,7 @@ public class LinkedListOp
         }
     }
 
-    public static Node<Integer> returnMaxedList (Node<Integer> first) // 3
+    public static Node<Integer> ex3(Node<Integer> first)
     {
         int max = getMax(first);
 
@@ -62,7 +79,7 @@ public class LinkedListOp
         return newFirst;
     }
 
-    public static boolean samePointSum (Node<Point> first) // 4
+    public static boolean ex4(Node<Point> first)
     {
         Node<Point> curr = first;
 
@@ -79,7 +96,7 @@ public class LinkedListOp
         return true;
     }
 
-    public static Node<Integer> upperSum (Node<Integer> first)
+    public static Node<Integer> ex5 (Node<Integer> first)
     {
         Node<Integer> curr = first;
 
@@ -88,15 +105,20 @@ public class LinkedListOp
 
         int currSum = 0;
 
-        while (curr != null && curr.getNext())
+        while (curr != null)
         {
-            if (curr.getNext().getValue() > curr.getValue())
+            if (curr.getNext() == null)
+            {
+                currSum += curr.getValue();
+                newCurr.setNext(new Node<Integer>(currSum));
+            }
+
+            else if (curr.getNext().getValue() > curr.getValue())
                 currSum += curr.getValue();
 
             else
             {
                 currSum += curr.getValue();
-
                 if (newFirst == null)
                 {
                     newFirst = new Node<Integer>(currSum);
@@ -111,6 +133,63 @@ public class LinkedListOp
 
                 currSum = 0;
             }
+
+            curr = curr.getNext();
+        }
+
+        return newFirst;
+    }
+
+    public static boolean ex6(Node<Integer> first)
+    {
+        Node<Integer> curr = first;
+
+        int count = 0;
+
+        for (int i = 1; curr != null; i++)
+        {
+            while (curr.getValue() == i)
+            {
+                curr = curr.getNext();
+                count++;
+            }
+
+            if (count != i)
+                return false;
+        }
+
+        return true;
+    }
+
+    public static Node<Integer> ex7(Node<Integer> first)
+    {
+        Node<Integer> curr = first;
+
+        Node<Integer> newFirst = null;
+        Node<Integer> newCurr = null;
+
+        while (curr != null)
+        {
+            int n = valueCounter(first, curr.getValue());
+
+            if (valueCounter(newFirst, curr.getValue()) == 0)
+            {
+                for (int i = 1; i <= n; i++)
+                {
+                    if (newFirst == null)
+                    {
+                        newFirst = new Node<Integer>(curr.getValue());
+                        newCurr = newFirst;
+                    }
+
+                    else
+                    {
+                        newCurr.setNext(new Node<Integer>(curr.getValue()));
+                        newCurr = newCurr.getNext();
+                    }
+                }
+            }
+
             curr = curr.getNext();
         }
 
