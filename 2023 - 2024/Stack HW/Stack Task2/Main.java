@@ -39,7 +39,7 @@ public class Main
         return temp;
     }
 
-    public static void sortedInsert (Stack<Integer> stack, int n // Ex3
+    public static void sortedInsert (Stack<Integer> stack, int n) // Ex3
     {
         Stack<Integer> tempStack = new Stack<>();
         while (!stack.isEmpty() && stack.top() < n)
@@ -82,6 +82,62 @@ public class Main
             s.push(bottom);
         }
     }
-    
 
+    public static boolean isUp (Stack<Integer> stack)
+    {
+        Stack<Integer> temp = new Stack<Integer>();
+
+        int last = stack.pop();
+
+        while (!stack.isEmpty())
+        {
+            int curr = stack.pop();
+
+            temp.push(curr);
+
+            if (curr > last)
+                last = curr;
+
+            else
+                return false;
+        }
+
+        return true;
+    }
+
+    public static boolean contains (Stack<Integer> s1, Stack<Integer> s2) // Ex6
+    {
+        Stack<Integer> t2 = new Stack<Integer>();
+        Stack<Integer> clone = new Stack<Integer>();
+
+        int curr1 = s1.top();
+
+        while (!s2.isEmpty())
+        {
+            int curr2 = s2.pop();
+
+            t2.push(curr2);
+            clone.push(curr2);
+        }
+
+        while (!clone.isEmpty())
+            s2.push(clone.pop());
+
+        boolean started = false;
+
+        while (!t2.isEmpty())
+        {
+            if (t2.top() == curr1)
+            {
+                s1.pop();
+                curr1 = s1.top();
+
+                started = true;
+            }
+
+            if (t2.top() != curr1 && started)
+                return false;
+        }
+        return true;
+    }
 }
