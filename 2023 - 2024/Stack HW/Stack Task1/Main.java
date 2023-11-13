@@ -53,7 +53,7 @@ public class Main
         {
             T currVal = stack.pop();
 
-            if (currVal == val)
+            if (currVal.equals(val))
                 count++;
 
             tempStack.push(currVal);
