@@ -1,4 +1,4 @@
-public class Main
+class Main
 {
     public static void remDups(Queue<Integer> q) // Ex1
     {
