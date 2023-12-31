@@ -1,4 +1,5 @@
-public class Queue<T>
+public class
+Queue<T>
 {
     private Node<T> first;
     private Node<T> last;
